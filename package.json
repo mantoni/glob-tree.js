@@ -1,0 +1,34 @@
+{
+  "name"             : "glob-tree",
+  "version"          : "0.1.0",
+  "description"      : "Tree with glob iterator",
+  "keywords"         : ["tree", "iterator", "glob", "match"],
+  "author"           : "Maximilian Antoni (http://maxantoni.de)",
+  "homepage"         : "http://maxantoni.de/projects/glob-tree.js/",
+  "main"             : "./lib/node.js",
+  "engines"          : {
+    "node"           : ">=0.6"
+  },
+  "scripts"          : {
+    "start"          : "mocha --watch",
+    "test"           : "make test"
+  },
+  "repository"       : {
+    "type"           : "git",
+    "url"            : "https://github.com/mantoni/glob-tree.js.git"
+  },
+  "dependencies"     : {
+    "live-tree"      : "~0.2.0",
+    "min-iterator"   : "~0.1.0",
+    "inherits"       : "~2.0.1"
+  },
+  "devDependencies"  : {
+    "mocha"          : ">=1.14 <2",
+    "jslint"         : "~0.2.5",
+    "consolify"      : "~0.6.0",
+    "phantomic"      : "~0.2.1",
+    "browser-reload" : ">=1.0 <2"
+  },
+  "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
+  "license"          : "MIT"
+}
