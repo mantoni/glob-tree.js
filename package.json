@@ -18,7 +18,7 @@
     "url"            : "https://github.com/mantoni/glob-tree.js.git"
   },
   "dependencies"     : {
-    "live-tree"      : "~0.2.0",
+    "live-tree"      : "~0.3.0",
     "min-iterator"   : "~0.1.0",
     "inherits"       : "~2.0.1"
   },
