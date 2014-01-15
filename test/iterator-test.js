@@ -254,9 +254,7 @@ describe('iterator.next', function () {
   it('does not fetch parent iterator for a.*', function () {
     var n = new Node('root');
     n.set('a.b', 1);
-    n.children.iterator = function () {
-      throw new Error('Unexpected');
-    };
+    n.children.iterator = null;
 
     assert.doesNotThrow(function () {
       toArray(n, 'a.*');
@@ -267,9 +265,7 @@ describe('iterator.next', function () {
     var n = new Node('root');
     n.set('a.b', 1);
     n.set('a.b.c', 2);
-    n._map.a._map.b.children.iterator = function () {
-      throw new Error('Unexpected');
-    };
+    n._map.a._map.b.children.iterator = null;
 
     assert.doesNotThrow(function () {
       toArray(n, 'a.*');
@@ -280,9 +276,7 @@ describe('iterator.next', function () {
     var n = new Node('root');
     n.set('a.b', 1);
     n.set('a.b.c', 2);
-    n._map.a._map.b.children.iterator = function () {
-      throw new Error('Unexpected');
-    };
+    n._map.a._map.b.children.iterator = null;
 
     assert.doesNotThrow(function () {
       toArray(n, '*.b');
