@@ -1,26 +1,23 @@
 SHELL := /bin/bash
 PATH  := node_modules/.bin:${PATH}
 
-default: test phantom browser
-
 tests   = ./test/*-test.js
-html    = test/all.html
 version = $(shell node -p "require('./package.json').version")
 
+default: test cov
 
 .PHONY: test
 test:
 	@jslint --color lib/*.js ${tests}
-	@mocha test
+	@mocha --reporter list
 
-phantom:
-	@consolify --mocha --js ${tests} | phantomic
+cov:
+	@browserify -t coverify ${tests} | mocaccino -b | phantomic | coverify
 
-browser:
-	@echo "Consolify tests > file://`pwd`/${html}"
-	@consolify --mocha -o ${html} ${tests} browser-reload
+html:
+	@browserify -t coverify ${tests} | mocaccino -b | consolify -r -t "live-list unit tests" > test/all.html
 
-release: test phantom
+release: test cov
 ifeq (v${version},$(shell git tag -l v${version}))
 	@echo "Version ${version} already released!"
 	@exit 1
