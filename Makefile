@@ -3,6 +3,7 @@ PATH  := node_modules/.bin:${PATH}
 
 tests   = ./test/*-test.js
 version = $(shell node -p "require('./package.json').version")
+name    = $(shell node -p "require('./package.json').name")
 
 default: test cov
 
@@ -15,7 +16,7 @@ cov:
 	@browserify -t coverify ${tests} | mocaccino -b | phantomic | coverify
 
 html:
-	@browserify -t coverify ${tests} | mocaccino -b | consolify -r -t "live-list unit tests" > test/all.html
+	@browserify ${tests} | mocaccino -b | consolify -r -t "${name} unit tests" > test/all.html
 
 release: test cov
 ifeq (v${version},$(shell git tag -l v${version}))
