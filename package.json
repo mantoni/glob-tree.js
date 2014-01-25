@@ -10,7 +10,7 @@
     "node"           : ">=0.8"
   },
   "scripts"          : {
-    "start"          : "mocha --watch",
+    "start"          : "mocha --watch --reporter min",
     "test"           : "make"
   },
   "repository"       : {
