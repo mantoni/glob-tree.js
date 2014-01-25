@@ -303,4 +303,48 @@ describe('iterator.next', function () {
     assert.deepEqual([], toArray(n, '*.b'));
   });
 
+  it('includes b while iterating *', function () {
+    var n = new Node('root');
+    n.set('a', 1);
+    var i = n.iterator('*');
+    i.next();
+
+    n.set('b', 2);
+
+    assert.equal(2, i.next().value);
+  });
+
+  it('includes a.b while iterating a.*', function () {
+    var n = new Node('root');
+    n.set('a.a', 1);
+    var i = n.iterator('a.*');
+    i.next();
+
+    n.set('a.b', 2);
+
+    assert.equal(2, i.next().value);
+  });
+
+  it('includes a.c while iterating **', function () {
+    var n = new Node('root');
+    n.set('a.b', 1);
+    var i = n.iterator('**');
+    i.next();
+
+    n.set('a.c', 2);
+
+    assert.equal(2, i.next().value);
+  });
+
+  it('includes a.b.d while iterating a.**', function () {
+    var n = new Node('root');
+    n.set('a.b.c', 1);
+    var i = n.iterator('a.**');
+    i.next();
+
+    n.set('a.b.d', 2);
+
+    assert.equal(2, i.next().value);
+  });
+
 });
