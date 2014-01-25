@@ -10,7 +10,6 @@
 
 var assert      = require('assert');
 var MinIterator = require('min-iterator');
-var liveTree    = require('live-tree');
 
 var Node        = require('../lib/node').Node;
 var iterator    = require('../lib/iterator');
@@ -230,7 +229,7 @@ describe('iterator.next', function () {
 
     var i = iterator.create(n, 'a.**');
 
-    assert.strictEqual(i.constructor, liveTree.Iterator);
+    assert(i instanceof MinIterator);
   });
 
   it('return a live-tree iterator if no match is given', function () {
@@ -239,7 +238,7 @@ describe('iterator.next', function () {
 
     var i = iterator.create(n);
 
-    assert.strictEqual(i.constructor, liveTree.Iterator);
+    assert(i instanceof MinIterator);
   });
 
   it('return a live-tree iterator for **', function () {
@@ -248,7 +247,7 @@ describe('iterator.next', function () {
 
     var i = iterator.create(n, '**');
 
-    assert.strictEqual(i.constructor, liveTree.Iterator);
+    assert(i instanceof MinIterator);
   });
 
   it('does not fetch parent iterator for a.*', function () {
