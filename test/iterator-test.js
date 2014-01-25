@@ -5,7 +5,7 @@
  *
  * @license MIT
  */
-/*globals describe, it, before, after, beforeEach, afterEach*/
+/*globals describe, it*/
 'use strict';
 
 var assert      = require('assert');
