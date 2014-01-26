@@ -10,10 +10,13 @@ default: test cov
 .PHONY: test
 test:
 	@jslint --color lib/*.js ${tests}
-	@mocha --reporter list
+	@mocha --reporter spec
 
 cov:
-	@browserify -t coverify ${tests} | mocaccino -b | phantomic | coverify
+	@browserify -t coverify -t brout ${tests} | mocaccino -b -r spec | phantomic | coverify
+
+wd:
+	@browserify -t min-wd ${tests} | mocaccino -b -r spec | min-wd
 
 html:
 	@browserify ${tests} | mocaccino -b | consolify -r -t "${name} unit tests" > test/all.html

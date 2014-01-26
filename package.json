@@ -24,12 +24,14 @@
   },
   "devDependencies"  : {
     "mocha"          : ">=1.17 <2",
-    "jslint"         : "~0.2.6",
+    "jslint"         : "~0.2.7",
     "browserify"     : ">=3.19 <4",
-    "coverify"       : "~1.0.4",
-    "mocaccino"      : "~0.1.1",
+    "coverify"       : "~1.0.5",
+    "mocaccino"      : "~0.2.0",
     "consolify"      : "~0.7.0",
-    "phantomic"      : "~0.2.1"
+    "phantomic"      : "~0.3.0",
+    "brout"          : "~0.1.2",
+    "min-wd"         : "~0.2.0"
   },
   "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
   "license"          : "MIT"
