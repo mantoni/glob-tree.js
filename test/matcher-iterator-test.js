@@ -11,12 +11,12 @@
 var assert   = require('assert');
 
 var Node     = require('../lib/node').Node;
-var iterator = require('../lib/iterator');
+var iterator = require('../lib/matcher-iterator');
 
 
 function toArray(n, match) {
   var a = [];
-  var i = iterator.matcher(n, match);
+  var i = iterator.create(n, match);
   while ((n = i.next()) !== undefined) {
     a.push(n.value);
   }
@@ -168,7 +168,7 @@ describe('iterator-matcher', function () {
   it('includes **.b while iterating', function () {
     var n = new Node('root');
     n.set('**', 1);
-    var i = iterator.matcher(n, 'a.b');
+    var i = iterator.create(n, 'a.b');
     i.next();
 
     n.set('**.b', 2);
@@ -179,7 +179,7 @@ describe('iterator-matcher', function () {
   it('includes a.** while iterating', function () {
     var n = new Node('root');
     n.set('**', 1);
-    var i = iterator.matcher(n, 'a.b');
+    var i = iterator.create(n, 'a.b');
     i.next();
 
     n.set('a.**', 2);
@@ -190,7 +190,7 @@ describe('iterator-matcher', function () {
   it('includes * while iterating', function () {
     var n = new Node('root');
     n.set('**', 1);
-    var i = iterator.matcher(n, 'a');
+    var i = iterator.create(n, 'a');
     i.next();
 
     n.set('*', 2);
@@ -201,7 +201,7 @@ describe('iterator-matcher', function () {
   it('includes *.b while iterating', function () {
     var n = new Node('root');
     n.set('**', 1);
-    var i = iterator.matcher(n, 'a.b');
+    var i = iterator.create(n, 'a.b');
     i.next();
 
     n.set('*.b', 2);
@@ -212,7 +212,7 @@ describe('iterator-matcher', function () {
   it('includes a.* while iterating', function () {
     var n = new Node('root');
     n.set('**', 1);
-    var i = iterator.matcher(n, 'a.b');
+    var i = iterator.create(n, 'a.b');
     i.next();
 
     n.set('a.*', 2);
