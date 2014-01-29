@@ -24,34 +24,15 @@ To use this module in a browser, download the npm package and then use
 var Node = require('glob-tree').Node;
 
 var n = new Node('root');
-n.set('a.b', 3);
-n.set('a.c', 7);
+n.set('**', 3);
+n.set('a.b', 7);
+n.set('a.c', 42);
 
 var c, i = n.iterator('a.*');
 while ((c = i.next()) !== undefined) {
   console.log(c.value);
 }
 ```
-
-## Node API
-
-The node is derived from [live-tree][] node and overrides the iterator
-function:
-
-- `iterator(match)`: Returns a new `Iterator` for the given match expression
-
-[live-tree]: https://github.com/mantoni/live-tree.js
-
-## Iterator API
-
-The iterator is derived from [min-iterator][].
-
-- `Iterator(node, match)`: Returns a new Iterator using the given root node and
-  match expression
-- `next()`: Returns the next node in the tree. If there are no items left,
-  `undefined` is returned.
-
-[min-iterator]: https://github.com/mantoni/min-iterator.js
 
 ## Match expressions
 
@@ -66,16 +47,54 @@ n.set('x.y.c', 4);
 n.set('z', 5);
 ```
 
-Then these `match` parameters can be passed to `n.iterator(match)`:
+You can find nodes with `n.iterator(match)` using wildcards:
 
-- `**` -> 1, 2, 3, 4
-- `*` -> 5
-- `x.**` -> 3, 4
-- `x.*` -> 3
-- `*.b` -> 1, 3
-- `**.c` -> 2, 4
-- `x.*.c` -> 4
+|   match   |   result   |
+|-----------|------------|
+| `'**'`    | 1, 2, 3, 4 |
+| `'*'`     | 5          |
+| `'x.**'`  | 3, 4       |
+| `'x.*'`   | 3          |
+| `'*.b'`   | 1, 3       |
+| `'**.c'`  | 2, 4       |
+| `'x.*.c'` | 4          |
+
+## Matchers
+
+Node names may contain wildcards as well. Assuming we have this tree:
+
+```js
+var n = new Node('root');
+n.set('**', 1);
+n.set('a.**', 2);
+n.set('a.*.c', 3);
+n.set('a.**.d', 4);
+n.set('*.b', 5);
+n.set('**.d', 6);
+```
+
+Querying for a node will also include the matchers:
+
+|    match    |   result   |
+|-------------|------------|
+| `'a.b'`     | 1, 2, 5    |
+| `'a.b.c'`   | 1, 2, 3    |
+| `'a.b.c.d'` | 1, 2, 4, 6 |
+
+## Node API
+
+Node is derived from [live-tree][] Node and overrides the iterator function:
+
+- `iterator(match[, options])`: Returns an `Iterator` for the given match
+  expression with these options:
+  - `matchers=true`: whether to include matchers
+  - `onlyMatchers=true`: whether to only include matchers
+
+Iterator is derived from [min-iterator][].
 
 ## License
 
 MIT
+
+[live-tree]: https://github.com/mantoni/live-tree.js
+[min-iterator]: https://github.com/mantoni/min-iterator.js
