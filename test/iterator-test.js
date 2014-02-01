@@ -25,6 +25,12 @@ function iteratorMatchingOne() {
   return iteratorMatching('one', 'one');
 }
 
+function values(i) {
+  return i.toArray().map(function (n) {
+    return n.value;
+  });
+}
+
 
 describe('iterator', function () {
 
@@ -311,7 +317,7 @@ describe('iterator.next', function () {
 
     n.set('b', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes a.b while iterating a.*', function () {
@@ -322,7 +328,7 @@ describe('iterator.next', function () {
 
     n.set('a.b', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes a.c while iterating **', function () {
@@ -333,7 +339,7 @@ describe('iterator.next', function () {
 
     n.set('a.c', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes a.b.d while iterating a.**', function () {
@@ -344,7 +350,37 @@ describe('iterator.next', function () {
 
     n.set('a.b.d', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
+  });
+
+  it('does not return wildcard items', function () {
+    var n = new Node('root');
+    n.set('a.b', 1);
+    n.set('a.c', 2);
+    n.set('**', 3);
+    n.set('*.*', 4);
+
+    var i = iterator.create(n, 'a.*');
+
+    assert.deepEqual([1, 2], values(i));
+  });
+
+  it('returns exact ** item', function () {
+    var n = new Node('root');
+    n.set('a.**', 1);
+
+    var i = iterator.create(n, 'a.**');
+
+    assert.deepEqual([1], values(i));
+  });
+
+  it('returns exact * item', function () {
+    var n = new Node('root');
+    n.set('a.*', 1);
+
+    var i = iterator.create(n, 'a.*');
+
+    assert.deepEqual([1], values(i));
   });
 
 });

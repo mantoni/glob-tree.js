@@ -23,6 +23,12 @@ function toArray(n, match) {
   return a;
 }
 
+function values(i) {
+  return i.toArray().map(function (n) {
+    return n.value;
+  });
+}
+
 
 describe('iterator-matcher', function () {
 
@@ -173,7 +179,7 @@ describe('iterator-matcher', function () {
 
     n.set('**.b', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes a.** while iterating', function () {
@@ -184,7 +190,7 @@ describe('iterator-matcher', function () {
 
     n.set('a.**', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes * while iterating', function () {
@@ -195,7 +201,7 @@ describe('iterator-matcher', function () {
 
     n.set('*', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes *.b while iterating', function () {
@@ -206,7 +212,7 @@ describe('iterator-matcher', function () {
 
     n.set('*.b', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
   it('includes a.* while iterating', function () {
@@ -217,7 +223,7 @@ describe('iterator-matcher', function () {
 
     n.set('a.*', 2);
 
-    assert.equal(2, i.next().value);
+    assert.deepEqual([2], values(i));
   });
 
 });

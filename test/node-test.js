@@ -15,6 +15,13 @@ var MinIterator  = require('min-iterator');
 var Node         = require('../lib/node').Node;
 
 
+function values(i) {
+  return i.toArray().map(function (n) {
+    return n.value;
+  });
+}
+
+
 describe('node', function () {
 
   it('is instance of live-tree node', function () {
@@ -77,7 +84,47 @@ describe('node', function () {
     });
 
     assert(i instanceof MinIterator);
-    assert.deepEqual(i.toArray(), [n._map['**'], n._map['*']]);
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('does not return * twice', function () {
+    var n = new Node('root');
+    n.set('*', 1);
+    n.set('a', 2);
+
+    var i = n.iterator('*');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('does not return ** twice', function () {
+    var n = new Node('root');
+    n.set('**', 1);
+    n.set('a', 2);
+
+    var i = n.iterator('**');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('does not return *.b twice', function () {
+    var n = new Node('root');
+    n.set('*.b', 1);
+    n.set('a.b', 2);
+
+    var i = n.iterator('*.b');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('does not return **.a twice', function () {
+    var n = new Node('root');
+    n.set('**.b', 1);
+    n.set('a.b', 2);
+
+    var i = n.iterator('**.b');
+
+    assert.deepEqual(values(i), [1, 2]);
   });
 
 });
