@@ -10,7 +10,7 @@
     "node"           : ">=0.8"
   },
   "scripts"          : {
-    "start"          : "mochify --watch",
+    "start"          : "mocha --watch -R min",
     "lint"           : "jslint --color -- ./**/*.js",
     "test-wd"        : "mochify --wd -R dot",
     "test"           : "npm run lint && mocha -R dot && mochify -R dot"
@@ -28,7 +28,7 @@
     "mocha"          : ">=1.17 <2",
     "jslint"         : "~0.2.7",
     "browserify"     : ">=3.19 <4",
-    "coverify"       : "~1.0.5",
+    "coverify"       : "~1.0.6",
     "mochify"        : "~0.3.1"
   },
   "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
