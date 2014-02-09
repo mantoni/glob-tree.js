@@ -21,6 +21,13 @@ function values(i) {
   });
 }
 
+function matcherTree() {
+  var n = new Node('root');
+  n.set('**', 1);
+  n.set('*', 2);
+  n.set('a', 3);
+  return n;
+}
 
 describe('node', function () {
 
@@ -48,10 +55,7 @@ describe('node', function () {
   });
 
   it('returns an iterator that includes matchers', function () {
-    var n = new Node('root');
-    n.set('**', 1);
-    n.set('*', 2);
-    n.set('a', 3);
+    var n = matcherTree();
 
     var i = n.iterator('a');
 
@@ -60,10 +64,7 @@ describe('node', function () {
   });
 
   it('returns an iterator that excludes matchers', function () {
-    var n = new Node('root');
-    n.set('**', 1);
-    n.set('*', 2);
-    n.set('a', 3);
+    var n = matcherTree();
 
     var i = n.iterator('a', {
       matchers : false
@@ -73,11 +74,17 @@ describe('node', function () {
     assert.deepEqual(i.toArray(), [n._map.a]);
   });
 
+  it('does not exclude matchers for empty opts', function () {
+    var n = matcherTree();
+
+    var i = n.iterator('a', {});
+
+    assert(i instanceof MinIterator);
+    assert.deepEqual(i.toArray(), [n._map['**'], n._map['*'], n._map.a]);
+  });
+
   it('returns an iterator that only includes matchers', function () {
-    var n = new Node('root');
-    n.set('**', 1);
-    n.set('*', 2);
-    n.set('a', 3);
+    var n = matcherTree();
 
     var i = n.iterator('a', {
       onlyMatchers : true
