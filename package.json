@@ -10,8 +10,10 @@
     "node"           : ">=0.8"
   },
   "scripts"          : {
-    "start"          : "mocha --watch -R min",
-    "test"           : "make"
+    "start"          : "mochify --watch",
+    "lint"           : "jslint --color -- ./**/*.js",
+    "test-wd"        : "mochify --wd -R dot",
+    "test"           : "npm run lint && mocha -R dot && mochify -R dot"
   },
   "repository"       : {
     "type"           : "git",
@@ -27,11 +29,7 @@
     "jslint"         : "~0.2.7",
     "browserify"     : ">=3.19 <4",
     "coverify"       : "~1.0.5",
-    "mocaccino"      : "~0.2.0",
-    "consolify"      : "~0.7.0",
-    "phantomic"      : "~0.3.0",
-    "brout"          : "~0.1.2",
-    "min-wd"         : "~0.2.0"
+    "mochify"        : "~0.3.1"
   },
   "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
   "license"          : "MIT"
