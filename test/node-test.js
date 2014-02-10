@@ -23,9 +23,10 @@ function values(i) {
 
 function matcherTree() {
   var n = new Node('root');
-  n.set('**', 1);
-  n.set('*', 2);
   n.set('a', 3);
+  n.set('b', 4);
+  n.set('*', 2);
+  n.set('**', 1);
   return n;
 }
 
@@ -51,8 +52,39 @@ describe('node', function () {
     var i = n.iterator('*');
 
     assert(i instanceof MinIterator);
-    assert.deepEqual(i.toArray(), [n._map.a, n._map.b]);
+    assert.deepEqual(values(i), [1, 2]);
   });
+
+  it('returns an iterator that includes all', function () {
+    var n = matcherTree();
+
+    var i = n.iterator();
+
+    assert(i instanceof MinIterator);
+    assert.deepEqual(values(i), [1, 2, 3, 4]);
+  });
+
+  it('includes wildcard only once', function () {
+    var n = new Node('root');
+    n.set('**', 1);
+    n.set('*', 2);
+
+    var i = n.iterator('**');
+
+    assert(i instanceof MinIterator);
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  /*
+  it('does not crash when iterating "**" on "*.a"', function () {
+    var n = new Node('root');
+    n.set('*.a', 1);
+
+    var i = n.iterator('**');
+
+    assert.deepEqual(values(i), [1]);
+  });
+  */
 
   it('returns an iterator that includes matchers', function () {
     var n = matcherTree();
@@ -60,7 +92,7 @@ describe('node', function () {
     var i = n.iterator('a');
 
     assert(i instanceof MinIterator);
-    assert.deepEqual(i.toArray(), [n._map['**'], n._map['*'], n._map.a]);
+    assert.deepEqual(values(i), [1, 2, 3]);
   });
 
   it('returns an iterator that excludes matchers', function () {
@@ -71,7 +103,7 @@ describe('node', function () {
     });
 
     assert(i instanceof MinIterator);
-    assert.deepEqual(i.toArray(), [n._map.a]);
+    assert.deepEqual(values(i), [3]);
   });
 
   it('does not exclude matchers for empty opts', function () {
@@ -80,7 +112,7 @@ describe('node', function () {
     var i = n.iterator('a', {});
 
     assert(i instanceof MinIterator);
-    assert.deepEqual(i.toArray(), [n._map['**'], n._map['*'], n._map.a]);
+    assert.deepEqual(values(i), [1, 2, 3]);
   });
 
   it('returns an iterator that only includes matchers', function () {
