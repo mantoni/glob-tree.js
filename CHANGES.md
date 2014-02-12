@@ -1,5 +1,11 @@
 # Changes
 
+## 0.4.0
+
+- If iterator is created without args, iterate over all nodes
+- Using mochify to run tests
+- Bugfixes
+
 ## 0.3.0
 
 - Added support for matchers
