@@ -87,8 +87,8 @@ Node is derived from [live-tree][] Node and overrides the iterator function:
 
 - `iterator(match[, options])`: Returns an `Iterator` for the given match
   expression with these options:
-  - `matchers=true`: whether to include matchers
-  - `onlyMatchers=true`: whether to only include matchers
+  - `matchers`: whether to include matchers, defaults to `true`
+  - `onlyMatchers`: whether to only include matchers, defaults to `false`
 
 Iterator is derived from [min-iterator][].
 
