@@ -1,5 +1,9 @@
 # Changes
 
+## 0.4.1
+
+- Performance improvement
+
 ## 0.4.0
 
 - If iterator is created without args, iterate over all nodes
