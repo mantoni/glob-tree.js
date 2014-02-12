@@ -106,6 +106,17 @@ describe('node', function () {
     assert.deepEqual(values(i), [3]);
   });
 
+  it('excludes exact match', function () {
+    var n = matcherTree();
+
+    var i = n.iterator('*', {
+      matchers : false
+    });
+
+    assert(i instanceof MinIterator);
+    assert.deepEqual(values(i), [3, 4]);
+  });
+
   it('does not exclude matchers for empty opts', function () {
     var n = matcherTree();
 

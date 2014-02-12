@@ -365,22 +365,4 @@ describe('iterator.next', function () {
     assert.deepEqual([1, 2], values(i));
   });
 
-  it('returns exact ** item', function () {
-    var n = new Node('root');
-    n.set('a.**', 1);
-
-    var i = iterator.create(n, 'a.**');
-
-    assert.deepEqual([1], values(i));
-  });
-
-  it('returns exact * item', function () {
-    var n = new Node('root');
-    n.set('a.*', 1);
-
-    var i = iterator.create(n, 'a.*');
-
-    assert.deepEqual([1], values(i));
-  });
-
 });
