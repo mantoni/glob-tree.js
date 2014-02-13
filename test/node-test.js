@@ -75,17 +75,6 @@ describe('node', function () {
     assert.deepEqual(values(i), [1, 2]);
   });
 
-  /*
-  it('does not crash when iterating "**" on "*.a"', function () {
-    var n = new Node('root');
-    n.set('*.a', 1);
-
-    var i = n.iterator('**');
-
-    assert.deepEqual(values(i), [1]);
-  });
-  */
-
   it('returns an iterator that includes matchers', function () {
     var n = matcherTree();
 
@@ -173,6 +162,66 @@ describe('node', function () {
     n.set('a.b', 2);
 
     var i = n.iterator('**.b');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('finds a.* with **', function () {
+    var n = new Node('root');
+    n.set('a.*', 1);
+
+    var i = n.iterator('**');
+
+    assert.deepEqual(values(i), [1]);
+  });
+
+  it('finds *.a with **', function () {
+    var n = new Node('root');
+    n.set('*.a', 1);
+
+    var i = n.iterator('**');
+
+    assert.deepEqual(values(i), [1]);
+  });
+
+  it('finds *.a and *.b with a.*', function () {
+    var n = new Node('root');
+    n.set('*.a', 1);
+    n.set('*.b', 2);
+
+    var i = n.iterator('a.*');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  /*
+  it('finds a.* and b.* with *.a', function () {
+    var n = new Node('root');
+    n.set('a.*', 1);
+    n.set('b.*', 2);
+
+    var i = n.iterator('*.a');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+  */
+
+  it('finds *.a.c and *.b.c with a.*.c', function () {
+    var n = new Node('root');
+    n.set('*.a.c', 1);
+    n.set('*.b.c', 2);
+
+    var i = n.iterator('a.*.c');
+
+    assert.deepEqual(values(i), [1, 2]);
+  });
+
+  it('finds *.a.c and *.b.c with a.**.c', function () {
+    var n = new Node('root');
+    n.set('*.a.c', 1);
+    n.set('*.b.c', 2);
+
+    var i = n.iterator('a.**.c');
 
     assert.deepEqual(values(i), [1, 2]);
   });
