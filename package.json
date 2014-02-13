@@ -1,6 +1,6 @@
 {
   "name"             : "glob-tree",
-  "version"          : "0.4.1",
+  "version"          : "0.4.2",
   "description"      : "Tree with glob iterator",
   "keywords"         : ["tree", "iterator", "glob", "match"],
   "author"           : "Maximilian Antoni (http://maxantoni.de)",

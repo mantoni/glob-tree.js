@@ -1,5 +1,9 @@
 # Changes
 
+## 0.4.2
+
+- Find matchers with wildcard expressions
+
 ## 0.4.1
 
 - Performance improvement
