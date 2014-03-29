@@ -1,15 +1,15 @@
 SHELL := /bin/bash
-PATH  := node_modules/.bin:${PATH}
 
 version = $(shell node -p "require('./package.json').version")
 
-default: cov
+default:
 	npm test
 
-cov:
-	@browserify -t coverify --bare ./test/*.js | mocaccino -r spec | node | coverify
+install:
+	rm -rf node_modules
+	npm install
 
-release: test cov
+release: default
 	git tag -a -m "Release ${version}" v${version}
 	git push --follow-tags
 	npm publish

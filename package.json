@@ -10,10 +10,10 @@
     "node"           : ">=0.8"
   },
   "scripts"          : {
-    "start"          : "mocha --watch -R min",
-    "lint"           : "jslint --color -- ./**/*.js",
-    "test-wd"        : "mochify --wd -R dot",
-    "test"           : "npm run lint && mocha -R dot && mochify -R dot"
+    "start"          : "mochify --watch --node --cover",
+    "lint"           : "jslint --color './**/*.js'",
+    "test-wd"        : "mochify --wd",
+    "test"           : "npm run lint && mocha -R spec && mochify --cover"
   },
   "repository"       : {
     "type"           : "git",
@@ -26,10 +26,8 @@
   },
   "devDependencies"  : {
     "mocha"          : ">=1.17 <2",
-    "jslint"         : "~0.2.7",
-    "browserify"     : ">=3.19 <4",
-    "coverify"       : "~1.0.6",
-    "mochify"        : "~0.3.1"
+    "jslint"         : "~0.3.1",
+    "mochify"        : "~0.6.0"
   },
   "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
   "license"          : "MIT"
