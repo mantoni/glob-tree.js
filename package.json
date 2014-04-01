@@ -10,24 +10,24 @@
     "node"           : ">=0.10"
   },
   "scripts"          : {
-    "start"          : "mochify --watch --node --cover",
-    "lint"           : "jslint --color './**/*.js'",
+    "start"          : "mochify --watch",
+    "lint"           : "jslint --color \"**/*.js\"",
     "test-wd"        : "mochify --wd",
-    "test"           : "npm run lint && mocha -R spec && mochify --cover"
+    "test"           : "npm run lint && mocha && mochify --cover"
   },
   "repository"       : {
     "type"           : "git",
     "url"            : "https://github.com/mantoni/glob-tree.js.git"
   },
   "dependencies"     : {
-    "live-tree"      : "~0.3.0",
-    "min-iterator"   : "~0.1.1",
-    "inherits"       : "~2.0.1"
+    "live-tree"      : "^1.0",
+    "min-iterator"   : "^1.0",
+    "inherits"       : "^2.0"
   },
   "devDependencies"  : {
-    "mocha"          : ">=1.17 <2",
-    "jslint"         : "~0.3.1",
-    "mochify"        : "~0.6.0"
+    "mocha"          : "^1.21",
+    "jslint"         : "^0.6",
+    "mochify"        : "^1.1"
   },
   "files"            : ["lib", "README.md", "CHANGES.md", "LICENSE"],
   "license"          : "MIT"
