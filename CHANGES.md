@@ -1,5 +1,12 @@
 # Changes
 
+## 1.0.0
+
+- Use `min-iterator` 1.0
+- Use `live-tree` 1.0
+- Simplify build by using Mochify
+- Run tests in real browsers with SauceLabs
+
 ## 0.4.2
 
 - Find matchers with wildcard expressions
