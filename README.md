@@ -1,11 +1,11 @@
-# glob-tree.js [![Build Status](https://secure.travis-ci.org/mantoni/glob-tree.js.png?branch=master)](http://travis-ci.org/mantoni/glob-tree.js)
+# glob-tree.js
+
+[![Build Status]](https://travis-ci.org/mantoni/glob-tree.js)
+[![SemVer]](http://semver.org)
+[![License]](https://github.com/mantoni/glob-tree.js/blob/master/LICENSE)
 
 Tree with glob iterator. Glob expressions can be used to iterate over matching
 sub trees. The tree can be modified while iterating over the nodes.
-
-Repository: <https://github.com/mantoni/glob-tree.js>
-
----
 
 ## Install with npm
 
@@ -96,5 +96,8 @@ Iterator is derived from [min-iterator][].
 
 MIT
 
+[Build Status]: http://img.shields.io/travis/mantoni/glob-tree.js.svg
+[SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
+[License]: http://img.shields.io/npm/l/glob-tree.svg
 [live-tree]: https://github.com/mantoni/live-tree.js
 [min-iterator]: https://github.com/mantoni/min-iterator.js
